@@ -8,4 +8,8 @@ public class Tuple<X, Y> {
         this.x = x;
         this.y = y;
     }
+
+    public boolean equals(Tuple<X, Y> other) {
+        return this.x.equals(other.x) && this.y.equals(other.y);
+    }
 }
