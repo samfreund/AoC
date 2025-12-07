@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import utils.Tuple;
+import utils.Pair;
 
 class p1 {
     public static void main(String[] args) throws FileNotFoundException {
         Scanner in = new Scanner(new File("2025/d5/input.txt"));
 
-        List<Tuple<Long, Long>> tuples = new ArrayList<Tuple<Long, Long>>();
+        List<Pair<Long, Long>> tuples = new ArrayList<Pair<Long, Long>>();
         List<Long> l = new LinkedList<Long>();
 
         while (in.hasNextLine()) {
@@ -23,7 +23,7 @@ class p1 {
 
             String[] s_split = s.split("-");
 
-            tuples.add(new Tuple<Long, Long>(Long.parseLong(s_split[0]), Long.parseLong(s_split[1])));
+            tuples.add(new Pair<Long, Long>(Long.parseLong(s_split[0]), Long.parseLong(s_split[1])));
 
         }
 
@@ -36,7 +36,7 @@ class p1 {
         int count = 0;
 
         outerloop: for (Long n : l) {
-            for (Tuple<Long, Long> t : tuples) {
+            for (Pair<Long, Long> t : tuples) {
                 if (n >= t.x && n <= t.y) {
                     count++;
                     continue outerloop;

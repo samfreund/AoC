@@ -6,20 +6,20 @@ import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.Scanner;
 
-import utils.Tuple;
+import utils.Pair;
 
 class p2 {
     public static void main(String[] args) {
         try {
             Scanner in = new Scanner(new File("2025/d4/input.txt"));
 
-            HashSet<Tuple<Integer, Integer>> l = new HashSet<Tuple<Integer, Integer>>();
+            HashSet<Pair<Integer, Integer>> l = new HashSet<Pair<Integer, Integer>>();
 
             for (int row = 0; in.hasNext(); row++) {
                 String s = in.nextLine();
                 for (int col = 0; col < s.length(); col++) {
                     if (s.charAt(col) == '@') {
-                        l.add(new Tuple<Integer, Integer>(row, col));
+                        l.add(new Pair<Integer, Integer>(row, col));
                     }
                 }
             }
@@ -31,9 +31,9 @@ class p2 {
 
             do {
                 iter_count = 0;
-                Iterator<Tuple<Integer, Integer>> it = l.iterator();
+                Iterator<Pair<Integer, Integer>> it = l.iterator();
                 while (it.hasNext()) {
-                    Tuple<Integer, Integer> t = it.next();
+                    Pair<Integer, Integer> t = it.next();
                     if (accessible(l, t, 4)) {
                         iter_count++;
                         it.remove();
@@ -60,7 +60,7 @@ class p2 {
      * @param n number of allowable adjacent non-empty positions
      * @return
      */
-    private static boolean accessible(HashSet<Tuple<Integer, Integer>> l, Tuple<Integer, Integer> t, int n) {
+    private static boolean accessible(HashSet<Pair<Integer, Integer>> l, Pair<Integer, Integer> t, int n) {
         int count = 0;
 
         for (int row = -1; row <= 1; row++) {
@@ -69,7 +69,7 @@ class p2 {
                     continue;
                 }
 
-                Tuple<Integer, Integer> t_other = new Tuple<Integer, Integer>(t.x + row, t.y + col);
+                Pair<Integer, Integer> t_other = new Pair<Integer, Integer>(t.x + row, t.y + col);
 
                 if (l.contains(t_other)) {
                     count++;
