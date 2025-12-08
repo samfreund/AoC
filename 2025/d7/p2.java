@@ -1,14 +1,15 @@
 package d7;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
-
 import utils.Pair;
 
 public class p2 {
 
     private static int line;
+    private static HashMap<Pair<Integer, Integer>, Long> memo = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(new File("2025/d7/input.txt"));
@@ -38,26 +39,34 @@ public class p2 {
 
         in.close();
 
-
-        System.out.println(traverse(l, start.x, start.y));
+        System.out.println(traverse(l, start));
     }
 
-    private static int traverse(HashSet<Pair<Integer, Integer>> l, int x_start, int y_start) {
-        Pair<Integer, Integer> splitter;
+    private static long traverse(HashSet<Pair<Integer, Integer>> l, Pair<Integer, Integer> start) {
         boolean found = false;
 
+        if (memo.containsKey(start)) {
+            return memo.get(start);
+        }
+
+        int iter = start.x;
+
         do {
-            splitter = new Pair<>(x_start++, y_start);
-            if (l.contains(splitter)) {
+            iter++;
+            if (l.contains(new Pair<Integer, Integer>(iter, start.y))) {
                 found = true;
                 break;
             }
-        } while (x_start <= line);
+        } while (iter <= line);
 
         if (found) {
-            return traverse(l, splitter.x, splitter.y + 1) +
-                traverse(l, splitter.x, splitter.y - 1);
-            
+            long ret = traverse(l, new Pair<Integer, Integer>(iter, start.y + 1)) +
+                    traverse(l, new Pair<Integer, Integer>(iter, start.y - 1));
+
+            memo.put(start, ret);
+
+            return ret;
+
         }
         return 1;
     }
