@@ -17,9 +17,12 @@ public class Triple<X, Y, Z> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        if (!(o instanceof Pair)) return false;
+        if (this == o)
+            return true;
+        if (o == null)
+            return false;
+        if (!(o instanceof Pair))
+            return false;
         Triple<?, ?, ?> other = (Triple<?, ?, ?>) o;
         return Objects.equals(this.x, other.x) && Objects.equals(this.y, other.y) && Objects.equals(this.z, other.z);
     }
@@ -27,5 +30,10 @@ public class Triple<X, Y, Z> {
     @Override
     public int hashCode() {
         return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "[ " + x.toString() + " , " + y.toString() + " , " + z.toString() + " ]";
     }
 }
